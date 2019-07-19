@@ -8,6 +8,7 @@
     {
       "complex_modifications": {
         "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 50,
           "basic.to_delayed_action_delay_milliseconds": 500,
           "basic.to_if_alone_timeout_milliseconds": 1000,
           "basic.to_if_held_down_threshold_milliseconds": 500
@@ -20,19 +21,13 @@
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
                   {
                     "key_code": "left_shift",
-                    "modifiers": [
-                      "left_command",
-                      "left_control",
-                      "left_option"
-                    ]
+                    "modifiers": ["left_command", "left_control", "left_option"]
                   }
                 ],
                 "type": "basic"
@@ -345,9 +340,7 @@
                 "to": [
                   {
                     "key_code": "left_arrow",
-                    "modifiers": [
-                      "left_option"
-                    ]
+                    "modifiers": ["left_option"]
                   }
                 ],
                 "type": "basic"
@@ -372,9 +365,7 @@
                 "to": [
                   {
                     "key_code": "right_arrow",
-                    "modifiers": [
-                      "left_option"
-                    ]
+                    "modifiers": ["left_option"]
                   }
                 ],
                 "type": "basic"
@@ -447,9 +438,7 @@
                 "to": [
                   {
                     "key_code": "delete_forward",
-                    "modifiers": [
-                      "left_option"
-                    ]
+                    "modifiers": ["left_option"]
                   }
                 ],
                 "type": "basic"
@@ -474,9 +463,101 @@
                 "to": [
                   {
                     "key_code": "delete_or_backspace",
-                    "modifiers": [
-                      "left_option"
-                    ]
+                    "modifiers": ["left_option"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "german a umlaut",
+                "from": {
+                  "key_code": "insert"
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["right_option"]
+                  },
+                  {
+                    "key_code": "a"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "german o umlaut",
+                "from": {
+                  "key_code": "home"
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["right_option"]
+                  },
+                  {
+                    "key_code": "o"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "german u umlaut",
+                "from": {
+                  "key_code": "page_up"
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["right_option"]
+                  },
+                  {
+                    "key_code": "u"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "german ß",
+                "from": {
+                  "key_code": "page_down"
+                },
+                "to": [
+                  {
+                    "key_code": "s",
+                    "modifiers": ["right_option"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "screen shot",
+                "from": {
+                  "key_code": "screen_print"
+                },
+                "to": [
+                  {
+                    "key_code": "4",
+                    "modifiers": ["left_control", "left_command", "left_shift"]
                   }
                 ],
                 "type": "basic"
@@ -589,23 +670,48 @@
       "simple_modifications": [
         {
           "from": {
-            "key_code": "grave_accent_and_tilde"
+            "key_code": "left_command"
           },
           "to": {
-            "key_code": "non_us_backslash"
+            "key_code": "left_option"
           }
         },
         {
           "from": {
-            "key_code": "non_us_backslash"
+            "key_code": "left_option"
           },
           "to": {
-            "key_code": "grave_accent_and_tilde"
+            "key_code": "left_command"
+          }
+        },
+        {
+          "from": {
+            "key_code": "right_command"
+          },
+          "to": {
+            "key_code": "right_option"
+          }
+        },
+        {
+          "from": {
+            "key_code": "right_option"
+          },
+          "to": {
+            "key_code": "right_command"
+          }
+        },
+        {
+          "from": {
+            "key_code": "pause"
+          },
+          "to": {
+            "consumer_key_code": "eject"
           }
         }
       ],
       "virtual_hid_keyboard": {
         "caps_lock_delay_milliseconds": 0,
+        "country_code": 0,
         "keyboard_type": "iso"
       }
     }

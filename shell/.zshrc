@@ -2,27 +2,41 @@
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# autoload some stuff
+autoload -Uz compinit
+compinit
 
-# Powerline
-POWERLEVEL9K_MODE='awesome-patched'
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2 # number of displayed folder names
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir) # change left side
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs status) # change right side
-POWERLEVEL9K_DIR_HOME_FOREGROUND="black"
-POWERLEVEL9K_DIR_HOME_BACKGROUND="white"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="black"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="white"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="black"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="white"
+autoload -U promptinit
+promptinit
 
-source $ZSH/oh-my-zsh.sh
+# load the theme
+prompt spaceship
 
-# zsh plugins
+# theme settings
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+# better history
+HISTFILE=~/.zsh_history     #Where to save history to disk
+HISTSIZE=50000               #How many lines of history to keep in memory
+SAVEHIST=10000               #Number of history entries to save to disk
+## history command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history          # share command history data
 
 # zsh better history search (optional)
 autoload -U up-line-or-beginning-search
@@ -32,36 +46,36 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-# command prediction (optional)
-autoload predict-on
-predict-toggle() {
-  ((predict_on=1-predict_on)) && predict-on || predict-off
-}
-zle -N predict-toggle
-bindkey '^Z' predict-toggle
-zstyle ':predict' toggle true
-zstyle ':predict' verbose true
-
-# save ssh key passwords
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
-plugins=(git ssh-agent docker zsh-syntax-highlighting)
-
 # alias
 alias adb='~/Library/Android/sdk/platform-tools/adb'
 alias localdb='docker-compose exec mongodb mongo localhost/rise'
 alias editzsh='vim ~/.zshrc'
+alias localrec='docker exec -ti localdev_licode_erizo_agent_1 /bin/bash'
 alias localdev='cd ~/Documents/deployments/local_dev'
 alias rise='cd ~/Documents/rise/app'
 alias dockerdownandup='docker-compose down; ./init.sh; docker-compose up -d'
+alias mni='meteor npm i'
+alias gsu='git submodule update --init --recursive'
+# force docker to rebuild container
+dcrs () { docker-compose stop "$@" && docker-compose rm -f "$@" && docker-compose build --no-cache "$@" && docker-compose up -d }
 
 #rise bash profile
-#android (could be optional)
+#android
 export ANDROID_HOME=~/Library/Android/sdk/
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-export PUBLIC_IP=127.0.0.1 # <-- set correct ip
-export PUBLIC_HOSTNAME=$(hostname)
-export ROOT_URL=https://$(hostname)
+# <--- add env here
 
-# <-- add env settings here
+source ~/.bash_profile
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/alan/.sdkman"
+[[ -s "/Users/alan/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alan/.sdkman/bin/sdkman-init.sh"
+
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

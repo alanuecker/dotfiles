@@ -1,27 +1,42 @@
 ## Oh My Zsh
+
 ### Installation
+
 #### Ubuntu
+
 ```shell
-apt install zsh wget
+apt install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting wget
 ```
+
 #### macOs
+
 ```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
 ```shell
-brew install zsh zsh-completions wget
+brew install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting wget
 ```
-#### Download Oh My Zsh
+
+#### Install spaceship prompt
+
 ```shell
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+npm install -g spaceship-prompt
 ```
-#### Install Powerlevel9k
-```shell
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+#### Install Hyper
+
+Download
+
 ```
+https://hyper.is/#installation
+```
+
 - install one of the [patched fonts](https://github.com/alanuecker/dotfiles/tree/master/shell/patched)
-- select the installed font in the terminal manager
-  - iTerm2: `Preferences --> Profiles --> Text --> Change Font`
+- add the font to `.hyper.js`
+  - eg: `fontFamily`: `'"SourceCodePro+Powerline+Awesome Regular", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',`
+
 #### Settings
+
 - copy [`.zshrc`](https://github.com/alanuecker/dotfiles/blob/master/shell/.zshrc)
 - add settings from `.bash_profile` or add `source ~/.bash_profile` at the end of the `.zshrc`
