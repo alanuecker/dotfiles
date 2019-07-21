@@ -1,5 +1,3 @@
-## Oh My Zsh
-
 ### Installation
 
 #### Ubuntu
