@@ -48,14 +48,7 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 # alias
 alias adb='~/Library/Android/sdk/platform-tools/adb'
-alias localdb='docker-compose exec mongodb mongo localhost/rise'
 alias editzsh='vim ~/.zshrc'
-alias localrec='docker exec -ti localdev_licode_erizo_agent_1 /bin/bash'
-alias localdev='cd ~/Documents/deployments/local_dev'
-alias rise='cd ~/Documents/rise/app'
-alias dockerdownandup='docker-compose down; ./init.sh; docker-compose up -d'
-alias mni='meteor npm i'
-alias gsu='git submodule update --init --recursive'
 # force docker to rebuild container
 dcrs () { docker-compose stop "$@" && docker-compose rm -f "$@" && docker-compose build --no-cache "$@" && docker-compose up -d }
 
