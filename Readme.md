@@ -8,6 +8,14 @@ apt install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-high
 
 #### macOs
 
+##### Automatic
+
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/alanuecker/dotfiles/master/setup)"
+```
+
+##### Manual
+
 ```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
