@@ -152,15 +152,14 @@ module.exports = {
   plugins: [
     "hyperline"
   ],
-  config: {
-    hyperline: {                                                                 
-      plugins: [                                                                                                                                 
-        "cpu",
-        "memory",
-        "battery",                                                                   
-        "spotify"                                                                
-      ]                                                                          
-    },
+
+  hyperline: {                                                                 
+    plugins: [                                                                                                                                 
+      "cpu",
+      "memory",
+      "battery",                                                                   
+      "spotify"                                                                
+    ]                                                                          
   },
 
   // in development, you can create a directory under
