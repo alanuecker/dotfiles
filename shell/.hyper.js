@@ -6,19 +6,20 @@ module.exports = {
   config: {
     // choose either `'stable'` for receiving highly polished,
     // or `'canary'` for less polished but more frequent updates
-    updateChannel: 'stable',
+    updateChannel: "stable",
 
     // default font size in pixels for all tabs
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: '"SourceCodePro+Powerline+Awesome Regular", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily:
+      '"Roboto Mono for Powerline", "Source Code Pro for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
-    fontWeight: 'normal',
+    fontWeight: "normal",
 
     // font weight for bold characters: 'normal' or 'bold'
-    fontWeightBold: 'bold',
+    fontWeightBold: "normal",
 
     // line height as a relative unit
     lineHeight: 1,
@@ -27,29 +28,29 @@ module.exports = {
     letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(208,208,208,0.8)',
+    cursorColor: "rgba(208,208,208,0.8)",
 
     // terminal text color under BLOCK cursor
-    cursorAccentColor: '#000',
+    cursorAccentColor: "#000",
 
     // `'BEAM'` for |, `'UNDERLINE'` for _, `'BLOCK'` for █
-    cursorShape: 'BLOCK',
+    cursorShape: "BLOCK",
 
     // set to `true` (without backticks and without quotes) for blinking cursor
     cursorBlink: false,
 
     // color of the text
-    foregroundColor: '#d0d0d0',
+    foregroundColor: "#d0d0d0",
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: '#212121',
+    backgroundColor: "#212121",
 
     // terminal selection color
-    selectionColor: 'rgba(208,208,208,0.3)',
+    selectionColor: "rgba(208,208,208,0.3)",
 
     // border color (window, tabs)
-    borderColor: '#333',
+    borderColor: "#333",
 
     // custom CSS to embed in the main window
     css: `.line {
@@ -58,40 +59,40 @@ module.exports = {
     }`,
 
     // custom CSS to embed in the terminal window
-    termCSS: '',
+    termCSS: "",
 
     // if you're using a Linux setup which show native menus, set to false
     // default: `true` on Linux, `true` on Windows, ignored on macOS
-    showHamburgerMenu: '',
+    showHamburgerMenu: "",
 
     // set to `false` (without backticks and without quotes) if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
     // default: `true` (without backticks and without quotes) on Windows and Linux, ignored on macOS
-    showWindowControls: '',
+    showWindowControls: "",
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: "12px 14px",
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
     colors: {
-      black: '#151515',
-      red: '#ac4142',
-      green: '#7e8e50',
-      yellow: '#e5b567',
-      blue: '#6c99bb',
-      magenta: '#9f4e85',
-      cyan: '#7dd6cf',
-      white: '#d0d0d0',
-      lightBlack: '#505050',
-      lightRed: '#ac4142',
-      lightGreen: '#7e8e50',
-      lightYellow: '#e5b567',
-      lightBlue: '#6c99bb',
-      lightMagenta: '#9f4e85',
-      lightCyan: '#7dd6cf',
-      lightWhite: '#d0d0d0',
+      black: "#151515",
+      red: "#ac4142",
+      green: "#7e8e50",
+      yellow: "#e5b567",
+      blue: "#6c99bb",
+      magenta: "#9f4e85",
+      cyan: "#7dd6cf",
+      white: "#d0d0d0",
+      lightBlack: "#505050",
+      lightRed: "#ac4142",
+      lightGreen: "#7e8e50",
+      lightYellow: "#e5b567",
+      lightBlue: "#6c99bb",
+      lightMagenta: "#9f4e85",
+      lightCyan: "#7dd6cf",
+      lightWhite: "#d0d0d0",
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -106,17 +107,17 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: '/usr/local/bin/zsh',
+    shell: "/usr/local/bin/zsh",
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
-    shellArgs: ['--login'],
+    shellArgs: ["--login"],
 
     // for environment variables
     env: {},
 
     // set to `false` for no bell
-    bell: 'SOUND',
+    bell: "SOUND",
 
     // if `true` (without backticks and without quotes), selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -131,7 +132,7 @@ module.exports = {
     // choose either `'vertical'`, if you want the column mode when Option key is hold during selection (Default)
     // or `'force'`, if you want to force selection regardless of whether the terminal is in mouse events mode
     // (inside tmux or vim with mouse mode enabled for example).
-    macOptionSelectionMode: 'vertical',
+    macOptionSelectionMode: "vertical",
 
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
@@ -141,7 +142,21 @@ module.exports = {
     webGLRenderer: true,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+    hyperline: {
+      plugins: ["cpu", "memory", "battery", "spotify"],
+    },
+
+    hypercwd: {
+      initialWorkingDirectory: "~/Documents/pesdk-html5",
+    },
+
+    hypernpm: {
+      1: "start-esm-js",
+      2: "start-no-sourcemap",
+    },
   },
+
+  plugins: ["hyperline", "hypercwd", "hypernpm"],
 
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
@@ -149,19 +164,6 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [
-    "hyperline"
-  ],
-
-  hyperline: {                                                                 
-    plugins: [                                                                                                                                 
-      "cpu",
-      "memory",
-      "battery",                                                                   
-      "spotify"                                                                
-    ]                                                                          
-  },
-
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed

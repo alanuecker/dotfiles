@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=/usr/local/bin:$PATH
 
 # autoload some stuff
 autoload -Uz compinit
@@ -11,6 +11,8 @@ promptinit
 
 # load the theme
 prompt spaceship
+
+SPACESHIP_DIR_TRUNC_REPO=false
 
 # theme settings
 SPACESHIP_PROMPT_ORDER=(
@@ -47,23 +49,38 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 # alias
-alias adb='~/Library/Android/sdk/platform-tools/adb'
-alias editzsh='vim ~/.zshrc'
-# force docker to rebuild container
-dcrs () { docker-compose stop "$@" && docker-compose rm -f "$@" && docker-compose build --no-cache "$@" && docker-compose up -d }
+alias editzsh='nvim ~/.zshrc'
+alias cleanlocalbranches='git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D'
 
-#rise bash profile
+# fuzzy search
+fbr() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# ENHANCD settings 
+export ENHANCD_FILTER=fzf
+export ENHANCD_DISABLE_DOT=1
+
+# Change the default git editor to nvim
+export GIT_EDITOR=nvim
+
 #android
-export ANDROID_HOME=~/Library/Android/sdk/
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
-# <--- add env here
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+# avdmanager, sdkmanager
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+# adb, logcat
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+# emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 
 source ~/.bash_profile
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/alan/.sdkman"
@@ -72,3 +89,5 @@ export SDKMAN_DIR="/Users/alan/.sdkman"
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/git.plugin.zsh
+source ~/enhancd/init.sh
