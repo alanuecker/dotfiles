@@ -6,26 +6,8 @@
 autoload -Uz compinit
 compinit
 
-autoload -U promptinit
-promptinit
-
 # load the theme
-prompt spaceship
-
-SPACESHIP_DIR_TRUNC_REPO=false
-
-# theme settings
-SPACESHIP_PROMPT_ORDER=(
-  time          # Time stamps section
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
+source /usr/local/opt/spaceship/spaceship.zsh
 
 # better history
 HISTFILE=~/.zsh_history     #Where to save history to disk
@@ -49,45 +31,84 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 # alias
+# alias adb='~/Library/Android/sdk/platform-tools/adb'
 alias editzsh='nvim ~/.zshrc'
-alias cleanlocalbranches='git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D'
+
+# clean branches
+gclb() {
+  git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D;
+}
+
+# create tag and push to origin
+gtpo() { 
+  git tag $1 && git push origin $1;
+}
+
+# pick all commits between A (oldest) and B (newest)
+gcpr() {
+  git cherry-pick $1^..$2;
+}
+
+# rename a tag and push to remote
+gtr() {
+  git tag $1 $2;
+  git tag -d $2;
+  git push origin $1 :$2;
+}
 
 # fuzzy search
 fbr() {
   local branches branch
-  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # ENHANCD settings 
-export ENHANCD_FILTER=fzf
+export ENHANCD_FILTER=fzy
 export ENHANCD_DISABLE_DOT=1
 
 # Change the default git editor to nvim
 export GIT_EDITOR=nvim
 
+export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
+export PATH=$HOME/.local/bin:${PATH}
+
 #android
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 # avdmanager, sdkmanager
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+
 # adb, logcat
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 # emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 
+# ruby
+export PATH=$HOME/.rbenv/bin:$PATH
+eval "$(rbenv init - zsh)"
+
 source ~/.bash_profile
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/alan/.sdkman"
-[[ -s "/Users/alan/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alan/.sdkman/bin/sdkman-init.sh"
-
+source ~/enhancd/init.sh
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/git.plugin.zsh
-source ~/enhancd/init.sh
+source ~/.config/zsh/git.zsh
+source ~/.config/zsh/git.plugin.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/alanuecker/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alanuecker/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+# if [ -f '/Users/alanuecker/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alanuecker/google-cloud-sdk/completion.zsh.inc'; fi
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# alias python=/usr/bin/python3
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

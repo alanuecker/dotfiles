@@ -14,40 +14,42 @@ brew update
 brew upgrade -all
 
 echo "Installing zsh..."
-brew install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting wget
+brew install wget
+brew install fzf
+brew install neovim
+brew install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting
+wget -O ~/.zshrc https://raw.githubusercontent.com/alanuecker/dotfiles/main/shell/.zshrc
+wget -O ~/.config/zsh/git.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh
+wget -O ~/.config/zsh/git.plugin.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
+
 
 echo "Installing git..."
 brew install git
 
 echo "Installing node..."
 brew install node
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 echo "Installing yarn..."
 brew install yarn
 
 echo "Installing python..."
-brew install python
-brew install python3
+brew install pyenv
+
+echo "Install enhancd..."
+brew isntall fzy
+cd ~
+wget -qO- https://raw.githubusercontent.com/b4b4r07/enhancd
+
+echo "Setup karabiner..."
+brew cask install --appdir="/Applications" karabiner-elements
+wget -O ~/.config/karabiner/karabiner.json https://raw.githubusercontent.com/alanuecker/dotfiles/master/keyboard/karabiner/karabiner.json
 
 echo "Install software..."
 brew cask install --appdir="/Applications" google-chrome
 brew cask install --appdir="/Applications" visual-studio-code
 brew cask install --appdir="/Applications" spotify
-brew cask install --appdir="/Applications" station
-
-echo "Install enhancd..."
-brew isntall fzf
-cd ~
-wget -qO- https://raw.githubusercontent.com/b4b4r07/enhancd
-
-echo "Setup hyper..."
-brew cask install --appdir="/Applications" hyperterm
-npm install -g spaceship-prompt
-wget -O ~/.zshrc https://raw.githubusercontent.com/alanuecker/dotfiles/master/shell/.zshrc
-wget -O ~/.hyper.js https://raw.githubusercontent.com/alanuecker/dotfiles/master/shell/.hyper.js
-
-echo "Setup karabiner..."
-brew cask install --appdir="/Applications" karabiner-elements
-wget -O ~/.config/karabiner/karabiner.json https://raw.githubusercontent.com/alanuecker/dotfiles/master/keyboard/karabiner/karabiner.json
-wget -O ~/Library/Fonts https://github.com/alanuecker/dotfiles/raw/master/shell/patched/SourceCodePro%2BPowerline%2BAwesome%2BRegular.ttf
+brew cask install --appdir="/Applications" arc
+brew cask install --appdir="/Applications" notion
+brew cask install --appdir="/Applications" slack
+brew cask install --appdir="/Applications" docker
