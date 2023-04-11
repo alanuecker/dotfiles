@@ -5,11 +5,13 @@ sudo -v
 echo "Installing Xcode Command Line Tools."
 xcode-select --install
 
+echo "Confirm if Xcode is installed"
+
 defaults write com.apple.Finder AppleShowAllFiles true
 killall Finder
 
 echo "Installing homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
 brew upgrade -all
 
@@ -18,9 +20,11 @@ brew install wget
 brew install fzf
 brew install neovim
 brew install zsh zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting
+brew install spaceship
 wget -O ~/.zshrc https://raw.githubusercontent.com/alanuecker/dotfiles/main/shell/.zshrc
 wget -O ~/.config/zsh/git.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh
 wget -O ~/.config/zsh/git.plugin.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
+wget -O ~/.config/zsh/spaceship.zsh https://raw.githubusercontent.com/alanuecker/dotfiles/main/shell/spaceship.zsh
 
 
 echo "Installing git..."
@@ -37,7 +41,7 @@ echo "Installing python..."
 brew install pyenv
 
 echo "Install enhancd..."
-brew isntall fzy
+brew intsall fzy
 cd ~
 wget -qO- https://raw.githubusercontent.com/b4b4r07/enhancd
 
@@ -46,10 +50,10 @@ brew cask install --appdir="/Applications" karabiner-elements
 wget -O ~/.config/karabiner/karabiner.json https://raw.githubusercontent.com/alanuecker/dotfiles/master/keyboard/karabiner/karabiner.json
 
 echo "Install software..."
-brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" visual-studio-code
-brew cask install --appdir="/Applications" spotify
-brew cask install --appdir="/Applications" arc
-brew cask install --appdir="/Applications" notion
-brew cask install --appdir="/Applications" slack
-brew cask install --appdir="/Applications" docker
+brew install --cask --appdir="/Applications" google-chrome
+brew install --cask --appdir="/Applications" visual-studio-code
+brew install --cask --appdir="/Applications" spotify
+brew install --cask --appdir="/Applications" arc
+brew install --cask --appdir="/Applications" notion
+brew install --cask --appdir="/Applications" slack
+brew install --cask --appdir="/Applications" docker

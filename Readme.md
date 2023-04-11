@@ -3,5 +3,5 @@
 #### macOs
 
 ```shell
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/alanuecker/dotfiles/master/setup)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alanuecker/dotfiles/main/setup.sh)"
 ```

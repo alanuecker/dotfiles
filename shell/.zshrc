@@ -6,9 +6,6 @@
 autoload -Uz compinit
 compinit
 
-# load the theme
-source /usr/local/opt/spaceship/spaceship.zsh
-
 # better history
 HISTFILE=~/.zsh_history     #Where to save history to disk
 HISTSIZE=50000               #How many lines of history to keep in memory
@@ -67,7 +64,6 @@ fbr() {
 
 # ENHANCD settings 
 export ENHANCD_FILTER=fzy
-export ENHANCD_DISABLE_DOT=1
 
 # Change the default git editor to nvim
 export GIT_EDITOR=nvim
