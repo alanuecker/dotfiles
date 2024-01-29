@@ -1,10 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 
-# export PATH=/usr/local/bin:$PATH
+# export PATH=/opt/homebrew/bin:$PATH
 
 # autoload some stuff
 autoload -Uz compinit
 compinit
+
+source /opt/homebrew/opt/spaceship/spaceship.zsh
 
 # better history
 HISTFILE=~/.zsh_history     #Where to save history to disk
@@ -64,11 +66,14 @@ fbr() {
 
 # ENHANCD settings 
 export ENHANCD_FILTER=fzy
+export ENHANCD_DISABLE_DOT=1
 
-# Change the default git editor to nvim
+# Change the default editor to nvim
 export GIT_EDITOR=nvim
+export EDITOR=nvim
+export VISUAL=nvim
 
-export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
+export PATH=/bin:/usr/bin:/opt/homebrew/bin:${PATH}
 export PATH=$HOME/.local/bin:${PATH}
 
 #android
@@ -86,22 +91,18 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init - zsh)"
 
-source ~/.bash_profile
+# flutter
+export PATH=$PATH:~/documents/flutter/bin
 
 source ~/enhancd/init.sh
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/git.zsh
 source ~/.config/zsh/git.plugin.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/alanuecker/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alanuecker/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-# if [ -f '/Users/alanuecker/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alanuecker/google-cloud-sdk/completion.zsh.inc'; fi
-
-export NVM_DIR="$HOME/.config/nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # alias python=/usr/bin/python3
