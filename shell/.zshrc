@@ -6,7 +6,7 @@
 autoload -Uz compinit
 compinit
 
-source /opt/homebrew/opt/spaceship/spaceship.zsh
+source /home/linuxbrew/.linuxbrew/opt/spaceship/spaceship.zsh
 
 # better history
 HISTFILE=~/.zsh_history     #Where to save history to disk
@@ -73,31 +73,22 @@ export GIT_EDITOR=nvim
 export EDITOR=nvim
 export VISUAL=nvim
 
-export PATH=/bin:/usr/bin:/opt/homebrew/bin:${PATH}
-export PATH=$HOME/.local/bin:${PATH}
-
-#android
-export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-# avdmanager, sdkmanager
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
-
-# adb, logcat
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
-# emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # ruby
 export PATH=$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init - zsh)"
 
 # flutter
-export PATH=$PATH:~/documents/flutter/bin
+export PATH=$PATH:~/flutter/bin
+
+# pip
+export PATH=$PATH:$HOME/.local/bin
 
 source ~/enhancd/init.sh
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/linuxbrew/.linuxbrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/git.zsh
 source ~/.config/zsh/git.plugin.zsh
 
@@ -105,7 +96,11 @@ source ~/.config/zsh/git.plugin.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # alias python=/usr/bin/python3
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+alias ssh='ssh.exe'
+export PATH=$HOME/.dotnet/tools:$PATH
